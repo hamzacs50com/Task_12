@@ -1,0 +1,20 @@
+<launch>
+  <arg name="use_lidar" default="true"/>
+
+  <!-- generate robot_description from xacro and set parameter -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find my_robot)/urdf/ae86_bot.xacro' use_lidar:=$(arg use_lidar)" />
+
+  <!-- publisher for TF from URDF -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" value="50.0"/>
+  </node>
+
+  <!-- start Gazebo (empty world) -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- spawn the model into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ae86_bot" />
+
+  <!-- start RViz. If you don't have a pre-saved rviz file it will open default RViz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find my_robot)/rviz/my_robot.rviz" output="screen"/>
+</launch>
