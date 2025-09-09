@@ -30,21 +30,23 @@ git clone <repo_url>
 cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
+```
 
-Run
-
+### RUN
 Open 4 terminals:
+Terminal 1 – roscore
 
-    Terminal 1 – roscore
-
+```bash
 roscore
+```
 
 Terminal 2 – launch the omni kinematics node
-
+```bash
 roslaunch omni_kinematics omni_kinematics.launch
+```
 
 Terminal 3 – publish velocity commands
-
+```bash
 rostopic pub -r 5 /cmd_vel geometry_msgs/Twist "linear:
   x: 0.5
   y: 0.0
@@ -53,11 +55,12 @@ angular:
   x: 0.0
   y: 0.0
   z: 0.2"
+```
 
 Terminal 4 – echo wheel speeds
-
+```bash
     rostopic echo /wheel_speeds
-
+```
 Expected Output
 
 The node converts /cmd_vel into four wheel angular velocities.
@@ -103,29 +106,29 @@ Output matches:
 
 This task demonstrates the use of transformations (TF) in ROS.
 Build
-
+```bash
 cd ~/catkin_ws/src
 git clone <repo_url>
 cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
-
+```
 Run
 
 Open 3 terminals:
 
     Terminal 1 – roscore
-
+```bash
 roscore
-
+```
 Terminal 2 – launch the transformation setup
-
+```bash
 roslaunch transformations task12_1.launch
-
+```
 Terminal 3 – open RViz
-
+```bash
     rviz
-
+```
 Notes
 
     The launch file loads the URDF and TFs.
@@ -150,22 +153,23 @@ Run
 Open 3 terminals:
 
     Terminal 1 – roscore
-
+```bash
 roscore
-
+```
 Terminal 2 – launch the robot model
-
+```bash
 roslaunch my_robot display.launch
-
+```
 Terminal 3 – open RViz if not already started
-
+```bash
     rviz
-
+```
 Notes
 
     Modify the URDF/Xacro file to add sensors or links.
 
     To view the TF tree:
-
+```bash
 rosrun tf view_frames
 evince frames.pdf
+```
